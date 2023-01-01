@@ -141,7 +141,6 @@
             let $statusText = $status.children(".statusText");
             let $programStatus = $status.children("input").val();
 
-            console.log($(this).val());
             $(this).parent().html(($(this).val() > 0 ? $(this).val() : "무료"));
             if ($programStatus == "PAY_SUCCEED"){
                 $statusText.html("신청 완료");
@@ -149,10 +148,6 @@
                 $statusText.html("신청 취소");
                 $statusText.css("color", "red");
             }
-
-            // if ($(this).next().html() == "결제 취소"){
-            //     $(this).next().css("color", "red");
-            // }
         });
     });
 

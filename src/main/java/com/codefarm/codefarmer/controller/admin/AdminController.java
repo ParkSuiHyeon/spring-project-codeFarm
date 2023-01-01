@@ -156,6 +156,7 @@ public class AdminController {
     @GetMapping("/banner/register")
     public String bannerWrite(Criteria criteria, Model model) {
         model.addAttribute("banner", new Banner());
+        model.addAttribute("memberCounts", adminService.countByMember()); // 멤버 수
         return "/admin/banner-write";
     }
 
@@ -448,7 +449,7 @@ public class AdminController {
         if(criteria.getPage() == 0) {
             criteria.createCriteria(pageable.getPageNumber(), searchText, keyword);
         }
-        model.addAttribute("memberProgramCounts", adminService.countByMemberAlba()); // 정책 글 개수
+        model.addAttribute("memberAlbaCounts", adminService.countByMemberAlba()); // 정책 글 개수
         model.addAttribute("maxPage", 10); // 페이징
         model.addAttribute("memberAlbas", memberAlbas);
         model.addAttribute("resultCount", adminService.countByMemberAlbaSearch(keyword, searchText));

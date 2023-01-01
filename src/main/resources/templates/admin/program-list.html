@@ -141,14 +141,13 @@
 
         var now = new Date(); // 현재
         var year = now.getFullYear();   // 연도
-        var month = now.getMonth()+1;   // 월
+        var month = now.getMonth();   // 월
         var day = now.getDate();        // 일
-        var today = new Date(year, month, day);
+        var today = new Date(year, month, day, 9).getTime();
 
         $(document).ready(function() {
             $("td.count-wrap").each(function(index, item){
                 let $pay = $(this).siblings("td.cost").children("input").val();
-                console.log($pay);
                 if ($pay == 0) {
                     $(this).siblings("td.cost").html("무료");
                 } else if ($pay != 0) {
@@ -157,11 +156,8 @@
 
                 let $count = $(this).children(".count").html();
                 let $total = $(this).children(".total").html();
-                let date = $(this).children("input").val().split("-");
-                var endDate = new Date(date[0], date[1], date[2]);
-
-                var minus = today.getTime() - endDate.getTime() ;
-                var result = minus / (1000*60*60*24) ;
+                let endDate = new Date($(this).children("input").val()).getTime();
+                let result = today - endDate;
 
                 if (result > 0 || ($count == $total)){
                     $(this).next().html("마감");
